@@ -1,0 +1,23 @@
+{% extends "cfp/event/base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block title %}{% translate "Login" %} :: {% endblock %}
+
+{% block content %}
+    <h2>{% translate "Welcome back!" %}</h2>
+    <p>
+        {% blocktranslate trimmed %}
+            You do not need an account to view the event, or submit feedback, or receive
+            schedule updates. You'll only need an account if you participate in the
+            event as speaker or as an organiser.
+        {% endblocktranslate %}
+    </p>
+    <p>
+        {% blocktranslate trimmed %}
+            If you already created a proposal for a different event on this server, you can re-use your account
+            to log in for this event.
+        {% endblocktranslate %}
+    </p>
+    {% include "common/auth.html" %}
+{% endblock %}

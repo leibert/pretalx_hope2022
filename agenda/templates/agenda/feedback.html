@@ -1,0 +1,32 @@
+{% extends "agenda/base.html" %}
+{% load i18n %}
+{% load rich_text %}
+
+{% block content %}
+    <h3 class="talk-title">
+        <a href="{{ talk.urls.public }}">
+            {% translate "Feedback for" %} {{ quotation_open }}{{ talk.title }}{{ quotation_close }}
+        </a>
+        <small>
+            {{ talk.slot.start|date:"Y-m-d" }}, {{ talk.slot.start|date:"H:i" }}–{{ talk.slot.end|date:"H:i" }}, {{ talk.slot.room.name }}
+        </small>
+    </h3>
+    <div class="talk feedback-list">
+        {% for opinion in feedback %}
+            <div class="speakers feedback-box">
+                {% if opinion.speaker and talk.speakers.count > 1 %}
+                    <div>
+                        <em>{% translate "This review is for you personally, not for all speakers in this session." %}</em>
+                    </div>
+                {% endif %}
+                <i class="fa fa-quote-left quote" aria-hidden="true"></i>
+                <div class="feedback-text">
+                    {{ opinion.review|rich_text }}
+                </div>
+                <i class="fa fa-quote-right quote float-right" aria-hidden="true"></i>
+            </div>
+        {% empty %}
+            {% translate "There has been no feedback for this session yet." %}
+        {% endfor %}
+    </div>
+{% endblock %}

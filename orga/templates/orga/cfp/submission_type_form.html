@@ -1,0 +1,34 @@
+{% extends "orga/cfp/base.html" %}
+{% load bootstrap4 %}
+{% load compress %}
+{% load i18n %}
+{% load static %}
+
+{% block scripts %}
+    {% compress js %}
+        <script defer src="{% static "vendored/moment-with-locales.js" %}"></script>
+        <script defer src="{% static "vendored/moment-timezone-with-data-2012-2022.js" %}"></script>
+        <script defer src="{% static "vendored/datetimepicker/bootstrap-datetimepicker.js" %}"></script>
+        <script defer src="{% static "orga/js/datetimepicker.js" %}"></script>
+    {% endcompress %}
+{% endblock %}
+
+{% block cfp_content %}
+    <h2>
+        {% if form.instance.name %}
+            {% translate "Session Type" %}: {{ form.instance.name }}
+        {% else %}
+            {% translate "New Session Type" %}
+        {% endif %}
+    </h2>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form_errors form %}
+        {% bootstrap_field form.name layout='event' %}
+        {% bootstrap_field form.default_duration addon_after="minutes" layout='event' addon_after_class="input-group-append input-group-text" %}
+        {% bootstrap_field form.deadline layout='event' %}
+        {% bootstrap_field form.requires_access_code layout='event' %}
+        {% include "orga/submit_row.html" %}
+    </form>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends "orga/settings/base.html" %}
+{% load bootstrap4 %}
+{% load compress %}
+{% load i18n %}
+{% load static %}
+
+{% block settings_content %}
+    {% compress js %}
+        <script defer src="{% static "orga/js/widgetSettings.js" %}"></script>
+    {% endcompress %}
+    <form method="post" class="d-flex flex-column">
+        {% csrf_token %}
+
+        <h2>{% translate "Widget settings" %}</h2>
+        <div class="alert alert-info col-md-9 flip ml-auto">
+            {% blocktranslate trimmed %}
+                You can configure a pretalx schedule widget to show your event schedule
+                on your homepage, instead of using this page. If you want to disable the
+                schedule on here entirely, please activate the setting below.
+            {% endblocktranslate %}
+        </div>
+        {% bootstrap_form form layout='event' %}
+        <div class="submit-group panel">
+            <span></span>
+            <span>
+                <button type="submit" class="btn btn-lg btn-success">{% translate "Save" %}</button>
+            </span>
+        </div>
+    </form>
+
+    <h2>{% translate "Widget generation" %}</h2>
+    <p>
+        {% blocktranslate trimmed %}
+            The pretalx schedule widget is a way to embed your schedule into your event website. This way, your attendees can see your schedule without leaving your website, and you can style the schedule to fit right in with your website.
+        {% endblocktranslate %}
+    </p>
+
+    <div id="widget-generation">
+        <p>
+            {% blocktranslate trimmed %}
+                Using this form, you can generate code to copy and paste to your website source.
+            {% endblocktranslate %}
+        </p>
+        <form>
+            {% bootstrap_form extra_form layout='event' %}
+        </form>
+        <div class="submit-group panel">
+            <span></span>
+            <span>
+                <button id="generate-widget" class="btn btn-info btn-lg">{% translate "Generate widget" %}</button>
+            </span>
+        </div>
+    </div>
+    <div id="generated-widget" class="d-none">
+        <p>
+            {% blocktranslate trimmed %}
+                To embed the widget into your website, copy the following code to the <code>&lt;head></code> section of your website:
+            {% endblocktranslate %}
+        </p>
+        <pre id="widget-head">
+&lt;script type="text/javascript" src="{{ request.event.urls.schedule.full }}widget/v2.en.js">&lt;/script></pre>
+        <p>
+            {% blocktranslate trimmed %}
+                Then, copy the following code to the place of your website where you want the widget to show up:
+            {% endblocktranslate %}
+        </p>
+        <pre id="widget-body">
+&lt;pretalx-schedule event-url="{{ request.event.urls.base.full }}" locale="LOCALE" format="FORMAT" style="--pretalx-clr-primary: {{ request.event.primary_color|default:'#3aa57c' }}">&lt;/pretalx-schedule>
+&lt;noscript>
+   &lt;div class="pretalx-widget">
+        &lt;div class="pretalx-widget-info-message">
+            JavaScript is disabled in your browser. To access our schedule without JavaScript,
+            please &lt;a target="_blank" href="{{ request.event.urls.schedule.full }}">click here&lt;/a>.
+        &lt;/div>
+    &lt;/div>
+&lt;/noscript></pre>
+        <p>
+            <span class="text-success">
+                <i class="fa fa-info-circle"></i>
+            </span>
+            {% blocktranslate trimmed with link='https://docs.pretalx.org/user/event/widget.html' %}
+
+                Please look at <a href="{{ link }}">our documentation</a> for more information.
+            {% endblocktranslate %}
+        </p>
+    </div>
+
+    {% if request.event.is_public and request.event.feature_flags.show_schedule and request.event.current_schedule %}
+        <div class="mw-100 overflow-auto">
+            <h2>{% translate "Widget preview" %}</h2>
+            <p>
+                {% blocktranslate trimmed %}
+                    This is roughly what your widget will look like if you choose the grid format:
+                {% endblocktranslate %}
+            </p>
+            <pretalx-schedule event-url="{{ request.event.urls.base }}" locale="{{ request.event.locale }}" style="--pretalx-clr-primary: {{ request.event.primary_color|default:'#3aa57c' }}"></pretalx-schedule>
+      </div>
+   <script type="text/javascript" src="{{ request.event.urls.schedule }}widget/v2.{{ request.event.locale }}.js" async></script>
+        <noscript>
+           <div class="pretalx-widget">
+                <div class="pretalx-widget-info-message">
+                    JavaScript is disabled in your browser. To access our schedule without JavaScript,
+                    please <a target="_blank" href="{{ request.event.urls.schedule.full }}">click here</a>.
+                </div>
+            </div>
+        </noscript>
+    {% endif %}
+{% endblock %}

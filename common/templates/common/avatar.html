@@ -1,0 +1,34 @@
+{% load bootstrap4 %}
+{% load i18n %}
+
+<div class="avatar-form form-group row">
+    <label class="col-md-3 col-form-label">
+        {% translate "Profile picture" %}
+    </label>
+    <div class="avatar-form-fields col-md-9">
+        <div class="d-flex align-items-start">
+            <img
+                class="avatar {% if not user.avatar and not user.get_gravatar %}d-none{% endif %} order-1"
+                {% if request.event.feature_flags.use_gravatar %}data-gravatar="{{ user.gravatar_parameter }}"{% endif %}
+                data-avatar="{% if user.avatar %}{{ user.avatar.url }}{% endif %}"
+                alt="{% translate "Your avatar" %}"
+                {% if user.avatar %}
+                    src="{{ user.avatar.url }}"
+                {% elif user.get_gravatar %}
+                    {% if request.event.feature_flags.use_gravatar %}
+                        src="https://www.gravatar.com/avatar/{{ user.gravatar_parameter }}?s=512"
+                    {% endif %}
+                {% endif %}
+            />
+
+            {% if request.event.feature_flags.use_gravatar %}
+                {% bootstrap_field form.get_gravatar layout='event-inline' %}
+            {% endif %}
+        </div>
+
+        <div class="avatar-upload">
+            {% bootstrap_field form.avatar layout='inline' %}
+            <small class="form-text text-muted d-block">{{ form.avatar.help_text }}</small>
+        </div>
+    </div>
+</div>

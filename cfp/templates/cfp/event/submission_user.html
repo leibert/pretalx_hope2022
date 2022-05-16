@@ -1,0 +1,12 @@
+{% extends "cfp/event/submission_base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% load rich_text %}
+
+{% block inner %}
+    <h2>{{ title }}</h2>
+    <p>
+        {{ text|rich_text }}
+    </p>
+    {% include "common/auth.html" with form=form no_form=True no_buttons=True %}
+{% endblock %}

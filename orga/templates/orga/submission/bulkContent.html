@@ -1,0 +1,54 @@
+{% extends "orga/submission/base.html" %}
+{% load bootstrap4 %}
+{% load compress %}
+{% load formset_tags %}
+{% load i18n %}
+{% load static %}
+{% load rules %}
+
+{% block submission_content %}
+{% has_perm 'orga.send_mails' request.user request.event as can_send_mails %}
+{% has_perm 'orga.view_all_reviews' request.user request.event as can_view_all_reviews %}
+{% compress js %}
+    <script defer src="{% static "js/jquery.formset.js" %}"></script>
+    <script defer src="{% static "cfp/js/animateFormset.js" %}"></script>
+    <script defer src="{% static "orga/js/speakers.js" %}"></script>
+{% endcompress %}
+<form method="post" enctype="multipart/form-data"><fieldset>
+    {% if not submission %}
+    <legend>{% trans "Create submissions in Bulk" %}</legend>
+    {% endif %}
+        {% bootstrap_form_errors form %}
+        {% csrf_token %}
+   
+        {% bootstrap_field form.submission_type layout='event' %}
+        {% if form.track %}{% bootstrap_field form.track layout='event' %}{% endif %}
+        
+        <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="id_description">Bulk Import CSV</label>
+        <div class="col-md-9">
+            <textarea name="bulkSubmissionCSV" cols="40" rows="10" class="form-control" placeholder="Speaker Name| Speaker Email| Speaker Bio| Talk Title| Talk Abstract| Scheduling Notes" title="Speaker Name| Speaker Email| Speaker Bio| Talk Title| Talk Abstract| Scheduling Notes" id="bulkSubmissionCSV"></textarea>
+        <small class="form-text text-muted">Speaker Name| Speaker Email| Speaker Bio| Talk Title| Talk Abstract| Scheduling Notes</small>
+        </div>
+        
+        {% if questions_form %}{% bootstrap_form questions_form layout='event' %}{% endif %}
+
+        <div class="submit-group panel">
+            <span></span>
+            <span>
+                {% if form.instance.code and can_send_mails %}
+                    <a class="btn btn-lg btn-info" href="{{ request.event.orga_urls.compose_mails }}?submission={{ form.instance.code }}">
+                        <i class="fa fa-envelope-o"></i>
+                        {% trans "Send mail to speakers" %}
+                    </a>
+                {% endif %}
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fa fa-check"></i>
+                    {% trans "Save" %}
+                </button>
+            </span>
+        </div>
+    </fieldset></form>
+
+    <span id="vars" remoteUrl="{{ request.event.orga_urls.users }}?search=%QUERY"></span>
+{% endblock %}

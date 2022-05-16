@@ -1,0 +1,81 @@
+{% extends "orga/base.html" %}
+{% load i18n %}
+{% load rules %}
+
+{% block title %}{% translate "Dashboard" %}{% endblock %}
+
+{% block content %}
+    {% has_perm 'orga.create_events' request.user request.user as can_create_event %}
+    <form class="mb-4 m-2">
+        <input type="text" name="q" class="form-control" value="{% if request.GET.q %}{{ request.GET.q }}{% endif %}" placeholder="{% translate "Search" %}">
+    </form>
+    <h2>{% translate "Your upcoming events" %}</h2>
+    <div class="event-blocks dashboard-list">
+        {% for event in current_orga_events %}
+            <a class="event-block dashboard-block" href="{{ event.orga_urls.base }}">
+                <h2 class="name">{{ event.name }}</h2>
+                <div class="dashboard-description">
+                    <div class="date">{{ event.get_date_range_display }}</div>
+                </div>
+                <div class="stats">
+                    <div class="submissions">
+                        {% if event.submission_count %}
+                            {{ event.submission_count }}
+                            {% blocktranslate trimmed count count=event.submission_count %}
+                                proposal
+                            {% plural %}
+                                proposals
+                            {% endblocktranslate %}
+                        {% else %}
+                            {% translate "No proposals yet" %}
+                        {% endif %}
+                    </div>
+                    {% if event.is_public %}
+                        <div class="state active">{% translate "Live" %}</div>
+                    {% else %}
+                        <div class="state inactive">{% translate "Not public" %}</div>
+                    {% endif %}
+                </div>
+            </a>
+        {% endfor %}
+        {% if can_create_event %}
+            <a class="dashboard-block symbol" href="{% url "orga:event.create" %}">
+                <i class="fa fa-plus-circle" title="{% translate "Create a new event" %}"></i>
+            </a>
+        {% endif %}
+    </div>
+    {% if past_orga_events %}
+        <h2>{% translate "Your most recent events" %}</h2>
+        <div class="event-blocks dashboard-list">
+            {% for event in past_orga_events %}
+                <a class="event-block dashboard-block" href="{{ event.orga_urls.base }}">
+                    <h2 class="name">{{ event.name }}</h2>
+                    <div class="dashboard-description">
+                        <div class="date">{{ event.get_date_range_display }}</div>
+                    </div>
+                    <div class="stats">
+                        <div class="submissions">
+                            {% if event.submission_count %}
+                                {{ event.submission_count }}
+                                {% blocktranslate trimmed count count=event.submission_count %}
+                                    proposal
+                                {% plural %}
+                                    proposals
+                                {% endblocktranslate %}
+                            {% else %}
+                                {% translate "No proposals yet" %}
+                            {% endif %}
+                        </div>
+                        {% if event.is_public %}
+                            <div class="state active">
+                                {% if event.is_open %}{% translate "CfP open" %}{% else %}{% translate "Live" %}{% endif %}
+                            </div>
+                        {% else %}
+                            <div class="state inactive">{% translate "Not public" %}</div>
+                        {% endif %}
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "orga/cfp/base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+{% load rules %}
+{% load url_replace %}
+
+{% block content %}
+    <h2>
+        {{ page_obj.paginator.count }}
+        {% blocktranslate trimmed count count=page_obj.paginator.count %}
+            submitter
+        {% plural %}
+            submitters
+        {% endblocktranslate %}
+    </h2>
+
+    <div class="submit-group search-submit-group">
+        <form class="search-form">
+            {% bootstrap_form search_form %}
+            {% bootstrap_form filter_form %}
+            <button class="btn btn-info btn-search" type="submit">{% translate "Search" %}</button>
+        </form>
+    </div>
+    {% if filter_form.is_valid and filter_form.cleaned_data.question %}
+        <p class="text-muted ml-2">
+            <span class="fa fa-filter"></span>
+            {% blocktranslate trimmed with question=filter_form.cleaned_data.question.question %}
+                List filtered by answers to question "{{ question }}".
+            {% endblocktranslate %}
+            <a href="?{% url_replace request 'question' '' 'answer' '' 'answer__options' '' %}" class="text-muted">
+                <span class="fa fa-times"></span>
+                {% translate "Remove filter" %}
+            </a>
+        </p>
+    {% endif %}
+    {% has_perm 'orga.mark_speakers_arrived' request.user request.event as can_mark_speaker %}
+    {% has_perm 'orga.see_speakers_arrival' request.user request.event as can_see_speaker_status %}
+    <table class="table table-sm table-hover table-responsive-md table-flip">
+        <thead>
+            <tr>
+                <th>{% translate "Name" %}</th>
+                <th>{% translate "Scheduled Sessions" %}</th>
+                <th>{% translate "Accepted Proposals" %}</th>
+                <th>{% translate "Proposals" %}</th>
+                {% if can_mark_speaker or can_see_speaker_status %}<th></th>{% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for profile in speakers %}
+                <tr>
+                    <td><a href="{{ profile.orga_urls.base }}">{{ profile.user.get_display_name }}</a></td>
+                    <td>{{ profile.talks.count }}</td>
+                    <td>{{ profile.accepted_confirmed_submissions.count }}</td>
+                    <td>{{ profile.submissions.count }}</td>
+                    {% if can_mark_speaker or can_see_speaker_status %}
+                        <td class="action-column">
+                            {% if can_mark_speaker %}
+                                <a class="btn btn-sm btn-{{ profile.has_arrived|yesno:'success,info' }}" href="{{ profile.orga_urls.toggle_arrived }}?from=list">
+                                    {% if profile.has_arrived %}
+                                        {% translate "Mark speaker as not arrived" %}
+                                    {% else %}
+                                        {% translate "Mark speaker as arrived" %}
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                {% if profile.has_arrived %}
+                                    <a><i class="fa fa-check"></i> {% translate "Arrived" %}</a>
+                                {% else %}
+                                    <a><i class="fa fa-times"></i> {% translate "Not arrived" %}</a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% include "orga/pagination.html" %}
+{% endblock %}

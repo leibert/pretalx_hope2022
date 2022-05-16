@@ -1,0 +1,46 @@
+{% extends "agenda/base.html" %}
+{% load bootstrap4 %}
+{% load compress %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+    <script src="{% static "vendored/marked.min.js" %}" defer></script> {# do not compress #}
+    <script src="{% static "common/js/markdown.js" %}" defer></script>
+
+    <h3 class="talk-title">
+        <a href="{{ talk.urls.public }}">
+            {{ quotation_open }}{{ talk.title }}{{ quotation_close }}
+        </a>
+    </h3>
+    <div class="talk row col-lg-12">
+        <div class="talk-content">
+            <div class="description">
+                {% blocktranslate trimmed %}
+                    Reviews are a valuable tool for speakers to improve their content and presentation.
+                    Even a short review can prove valuable to a speaker! Please
+                    take the time and communicate your feedback in a constructive way.
+                {% endblocktranslate %}
+                {{ phrases.agenda.feedback_success }}
+                {% if not talk.does_accept_feedback or not can_give_feedback %}
+                    {% translate "You can't give feedback for this session at this time." %}
+                {% else %}
+                    <form method="post">
+                        {% bootstrap_form_errors form %}
+                        {% csrf_token %}
+                        {% if speakers|length > 1 %}
+                            {% bootstrap_field form.speaker layout='inline' %}
+                        {% endif %}
+                        <div class="markdown-column">
+                            {% bootstrap_field form.review layout='inline' %}
+                        </div>
+
+                        <button type="submit" class="btn btn-success float-right">
+                            {{ phrases.agenda.feedback_send }}
+                        </button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

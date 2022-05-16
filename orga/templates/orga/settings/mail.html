@@ -1,0 +1,37 @@
+{% extends "orga/settings/base.html" %}
+{% load bootstrap4 %}
+{% load compress %}
+{% load i18n %}
+{% load static %}
+
+{% block scripts %}
+    {% compress js %}
+        <script defer src="{% static "orga/js/mailSettings.js" %}"></script>
+    {% endcompress %}
+{% endblock %}
+
+{% block settings_content %}
+    <form method="post">
+        {% csrf_token %}
+        <h2>{% translate "E-mail settings" %}</h2>
+        <div class="alert alert-info offset-md-3">
+            {% blocktranslate trimmed %}
+                If you don't configure custom email settings, the global configuration
+                for this server will be used (ask your administrator for details).<br>
+                We recommend that you add email settings here explicitly.
+            {% endblocktranslate %}
+        </div>
+        {% bootstrap_form form layout='event' %}
+        <div class="submit-group panel">
+            <span></span>
+            <span>
+                {% if action == "edit" or action == "create" %}
+                    <button type="submit" class="btn btn-lg btn-success" name="test" value="1">
+                        {% translate "Save and test custom SMTP connection" %}
+                    </button>
+                    <button type="submit" class="btn btn-lg btn-info">{% translate "Save" %}</button>
+                {% endif %}
+            </span>
+        </div>
+    </form>
+{% endblock %}

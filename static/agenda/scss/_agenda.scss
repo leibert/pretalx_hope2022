@@ -1,0 +1,365 @@
+#main-container.main-schedule {
+  min-width: min-content;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 0;
+  #main-card {
+    min-width: 1200px; // make loading look less awkward
+    margin: 0 auto;
+    main {
+      padding: 1rem 0;
+      width: 100%;
+    }
+  }
+  header, #fahrplan.grid #schedule-nav { // keep these left while scrolling sideways
+    margin: 0;
+    padding: 0;
+    position: sticky;
+    left: 0;
+    box-sizing: border-box;
+    max-width: calc(100vw - 16px);
+  }
+  header > * {
+    padding: 0 16px;
+    margin-bottom: 8px;
+  }
+}
+header {
+  word-break: normal;
+}
+.schedule-header {
+  display: flex;
+  align-items: flex-end;
+  > span,
+  > a,
+  > div {
+    margin-left: 8px;
+  }
+  a i.fa {
+    padding-right: 0;
+  }
+}
+
+#schedule-nav {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  z-index: 900;
+
+  a {
+    font-size: 16px;
+    font-weight: normal;
+    border-radius: 0;
+    margin: 0;
+    &.active {
+    }
+  }
+
+  form {
+    max-width: 250px;
+  }
+
+  .header-right {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    & > * {
+      margin-right: 8px;
+      height: 90%;
+      summary {
+        height: 100%;
+        margin-bottom: 3px;
+      }
+    }
+  }
+}
+
+#fahrplan noscript, .pretalx-tabbed {
+  max-width: 80vw;
+  min-width: 360px;
+  margin: 0 auto;
+}
+
+#fahrplan noscript {
+  display: block;
+}
+
+.pretalx-tabbed {
+  display: flex;
+  flex-direction: column-reverse;
+  input[name=tabs] {
+    display: none;
+
+    &:not(:checked) + .pretalx-tab-content {
+      display: none;
+    }
+  }
+  .pretalx-tab-content {
+    margin-top: 12px;
+  }
+}
+.pretalx-tabs {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid $gray-lighter;
+  position: sticky;
+  top: 0;
+  background-color: $white;
+  z-index: 200;
+
+  h4, h3, h2, h1, .pretalx-tab {
+    padding: 8px 24px;
+    font-size: 14pt;
+    overflow: hidden;
+    border: 1px solid $gray-lighter;
+    border-bottom: none;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    box-shadow: 0 0 0.5em $gray-lightest;
+    cursor: pointer;
+    &.active {
+      border-top: 4px solid $brand-primary;
+    }
+    label {
+      margin-bottom: 0; /* container .pretalx-tab takes care of the spacing */
+      user-select: none;
+      cursor: pointer;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+  }
+}
+
+#talk-buttons {
+  display: flex;
+  justify-content: flex-end;
+  .btn {
+    margin-left: 8px;
+  }
+}
+
+.btn-sm .fa:not(:only-child) {
+  padding-right: 5px;
+}
+
+#exporttimestamp {
+  margin-bottom: 1em;
+}
+
+.export-icon {
+  width: 1.5em;
+  display: inline-block;
+}
+
+.pretalx-list-day {
+  .bucket-time {
+    color: rgba(0,0,0,.54);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  a:hover {
+    text-decoration: none;
+    .title { color: $brand-primary }
+  }
+}
+.pretalx-session {
+  display: flex;
+      min-width: 360px;
+      min-height: 96px;
+      margin: 8px;
+      overflow: hidden;
+  font-size: 14px;
+  &.break {
+    .pretalx-session-info .title {
+      color: rgba(0,0,0,.54);
+    }
+  }
+  &:hover {
+    .pretalx-session-info, .pretalx-session-time-box.avatar {
+      border-color: var(--track-color);
+    }
+  }
+  .pretalx-session-time-box {
+    width: 69px;
+    box-sizing: border-box;
+    background-color: var(--track-color);
+    padding: 12px 16px 8px 12px;
+    border-radius: 6px 0 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &.avatar {
+      width: auto;
+      background-color: white;
+      border: 1px solid;
+      border-color: rgba(0,0,0,.12);
+      border-right: none;
+      .avatar-wrapper {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 6px;
+        svg {
+          margin: 8px;
+        }
+      }
+      img {
+        width: 100px;
+      }
+    }
+    .start {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      align-self: stretch;
+    }
+    .duration {
+      color: hsla(0,0%,100%,.7);
+    }
+  }
+  .pretalx-session-info {
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    border-left: none;
+    border-radius: 0 6px 6px 0;
+    background-color: #fff;
+    min-width: 0;
+    color: rgba(0,0,0,.87);
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .speakers {
+      color: rgba(0,0,0,.54);
+    }
+    .abstract {
+      margin: 8px 0 12px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .bottom-info {
+      flex: auto;
+      display: flex;
+      align-items: flex-end;
+      .room, .track {
+        flex: 1;
+        white-space: nowrap;
+        display: inline-block;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: normal;
+      }
+      .track {
+        color: var(--track-color);
+        margin-right: 4px;
+      }
+      .room {
+        text-align: right;
+        color: rgba(0,0,0,.54);
+      }
+    }
+  }
+}
+article .pretalx-session .pretalx-session-info .abstract {
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  header {
+    text-align: right;
+    flex-direction: column;
+  }
+  #main-container.main-schedule #main-card {
+    min-width: 1000px;
+  }
+  #fahrplan {
+    width: 100%;
+
+    #schedule-nav {
+      align-items: baseline;
+
+      &>.navigation {
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: stretch;
+      }
+      .header-right {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        .btn-outline-info {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 1000px) {
+  #fahrplan #schedule-nav {
+    flex-direction: column;
+  }
+  #main-container.main-schedule {
+    max-width: 100%;
+  }
+  #main-container.main-schedule #main-card {
+    min-width: 90vw;
+  }
+}
+@media (max-width: 800px) {
+  #main-container.main-schedule #main-card {
+    main {
+      max-width: inherit;
+    }
+  }
+}
+
+@media print {
+  body {
+    background: none;
+    overflow: visible !important;
+    height: auto;
+  }
+  #schedule-nav,
+  #main-card .user-row,
+  header,
+  footer,
+  .schedule-header .btn,
+  #event-nonpublic {
+    display: none;
+  }
+  .container {
+    max-width: 100%;
+  }
+  .pretalx-schedule-day {
+    page-break-after: always;
+    overflow: visible !important;
+  }
+}
+.heading-with-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  & > :last-child {
+    margin-left: auto;
+  }
+}
+#fahrplan.list {
+  .pretalx-tab-content {
+    margin : 20px;
+    margin-top: 8px;
+  }
+}
