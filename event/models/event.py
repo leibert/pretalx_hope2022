@@ -354,6 +354,7 @@ class Event(LogMixin, FileCleanupMixin, models.Model):
         stats = "{base}submissions/statistics/"
         submission_feed = "{base}submissions/feed/"
         new_submission = "{submissions}new"
+        
         bulkCreate_submission = "{submissions}bulk"
         feedback = "{submissions}feedback/"
         apply_pending = "{submissions}apply-pending/"

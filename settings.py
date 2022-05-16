@@ -155,6 +155,7 @@ CSP_FORM_ACTION = merge_csp("'self'", config=config.get("site", "csp_form"))
 # if config.get("site", "cookie_domain"):
     # SESSION_COOKIE_DOMAIN = CSRF_COOKIE_DOMAIN = config.get("site", "cookie_domain")
 
+
 # SESSION_COOKIE_SECURE = config.getboolean(
     # "site", "https", fallback=SITE_URL.startswith("https:")
 # )

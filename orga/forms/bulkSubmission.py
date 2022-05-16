@@ -6,6 +6,7 @@ from pretalx.common.mixins.forms import ReadOnlyFlag, RequestRequire
 from pretalx.submission.models import Submission, SubmissionType
 
 
+
 class BulkSubmissionForm(ReadOnlyFlag, RequestRequire, forms.ModelForm):
     def __init__(self, event, **kwargs):
         self.event = event

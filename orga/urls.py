@@ -363,6 +363,7 @@ urlpatterns = [
                     submission.SubmissionContent.as_view(),
                     name="submissions.create",
                 ),
+                
                 path(
                     "submissions/bulk",
                     submission.BulkSubmissionContent.as_view(),

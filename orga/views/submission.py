@@ -493,6 +493,7 @@ class BulkSubmissionContent(ActionFromUrl, SubmissionViewMixin, CreateOrUpdateVi
         #     return self.get(self.request, *self.args, **self.kwargs)
         form.instance.event = self.request.event
 
+
         # # GET csv OF BULK IMPORTS:
         bulkSubmissions = self.request.POST['bulkSubmissionCSV']
         if bulkSubmissions == '':

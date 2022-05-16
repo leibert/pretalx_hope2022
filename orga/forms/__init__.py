@@ -5,6 +5,7 @@ from .submission import AnonymiseForm, SubmissionForm
 from .bulkSubmission import BulkSubmissionForm
 
 
+
 __all__ = [
     "AnonymiseForm",
     "CfPForm",
