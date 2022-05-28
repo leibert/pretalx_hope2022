@@ -1,0 +1,362 @@
+
+@font-face {
+    font-family: 'open_sans_condensedbold';
+    src: url('fonts/opensans-condbold-webfont.eot');
+    src: url('fonts/opensans-condbold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-condbold-webfont.woff2') format('woff2'),
+         url('fonts/opensans-condbold-webfont.woff') format('woff'),
+         url('fonts/opensans-condbold-webfont.ttf') format('truetype'),
+         url('fonts/opensans-condbold-webfont.svg#open_sans_condensedbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sanscondensed_light';
+    src: url('fonts/opensans-condlight-webfont.eot');
+    src: url('fonts/opensans-condlight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-condlight-webfont.woff2') format('woff2'),
+         url('fonts/opensans-condlight-webfont.woff') format('woff'),
+         url('fonts/opensans-condlight-webfont.ttf') format('truetype'),
+         url('fonts/opensans-condlight-webfont.svg#open_sanscondensed_light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sansCnLtIt';
+    src: url('fonts/opensans-condlightitalic-webfont.eot');
+    src: url('fonts/opensans-condlightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/opensans-condlightitalic-webfont.woff2') format('woff2'),
+         url('fonts/opensans-condlightitalic-webfont.woff') format('woff'),
+         url('fonts/opensans-condlightitalic-webfont.ttf') format('truetype'),
+         url('fonts/opensans-condlightitalic-webfont.svg#open_sansCnLtIt') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+	font-family:open_sanscondensed_light,Helvetica,sans-serif;
+	font-size:18pt;
+	line-height:24pt;
+	width: 90%;
+	height: 100%;	
+	margin: auto;
+	background: rgb(20,47,87);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+}
+
+pre {
+	padding-left: 2em;
+}
+
+p {
+	padding-left: 2em;
+	padding-right: 1em;
+}
+
+#pagecontent li {
+	margin-left: 2em;
+}
+
+a {
+	text-decoration:none;
+}
+
+a:hover {
+	text-decoration:underline;
+    cursor: pointer;
+}
+
+#topbar {
+	padding-top:8px;
+	text-align:center;
+}
+
+#pagehead h1 {
+  font-family: 'open_sans_condensedbold';
+	padding:4px 0 4px 0;
+	margin:0;
+}
+
+#pagehead,#pagecontent {
+	color:#181919;
+	background-color:#f7f7f7;
+	padding:8px 24px 8px 24px;
+	border-radius:8px;
+	border: 1px solid #303030;
+}
+
+#pagefoot {
+	padding:8px 24px 8px 24px;
+}
+
+#pagefoot a {
+	color:#eee;
+	font-size:200%;
+}
+
+#archives {
+    padding:32px 24px 8px 24px;
+    text-align-last: center; 
+}
+
+#archives a {
+	color:#eee;
+	font-size:125%;
+}
+
+#archives p {
+	color:#eee;
+	font-size:125%;
+}
+
+.headline {
+	font-weight:bold;
+	font-size:200%;
+}
+
+.sitemenu {
+	text-align:center;
+	list-style-type: none;
+	padding:1em;
+	margin:0;
+  line-height:1.75em;
+}
+
+.sitemenu li {
+	display: inline-block;
+	
+	border: 0px solid #999;
+	border-radius:0px;
+	padding:2px 4px 2px 4px;
+	margin:2px 2px 2px 2px;
+	font-size:100%;
+}
+
+.sitemenu li:hover {
+
+	border-color:#000;
+  cursor:pointer;
+	text-decoration: bold;
+}
+
+.sitemenu li a {
+	color:#eee;
+}
+
+.floatleft {
+	float:left;
+}
+.floatright {
+	float:right;
+}
+.clearboth {
+  clear:both;
+}
+
+.pagemenu {
+  width:20%;
+  border: 1px solid #333;
+	border-radius:4px;
+	padding:4px 8px 16px 8px;
+	margin:2px 2px 2px 2px;
+}
+
+
+.pagemenu ul {
+  margin:0;
+  padding:0;
+	list-style-type: none;
+}
+
+.pagemenu ul li {
+  margin:0;
+  padding:0;
+}
+
+#hope {
+	text-align:center;
+	padding-top:8px;
+}
+
+.box80 {
+  width:80%;
+  color:#eee;
+  font-size:160%;
+  text-align:center;
+  margin:auto;
+  max-width:900px;
+}
+
+.box90 {
+  width:80%;
+  color:#eee;
+  font-size:200%;
+  text-align:center;
+  margin:auto;
+  max-width:900px;
+}
+
+#posters {
+  vertical-align:top;
+}
+
+.biotxt {
+  font-size:12pt;
+  width:80%;
+  margin-left: 50pt;
+}
+
+.zoomable {
+  width:25%;
+  transition: all 0.3s ease-in-out;
+}
+
+.zoomable:hover {
+  width:50%;
+}
+
+.mailform {
+  margin-left:2em;
+}
+
+.shell {
+  white-space:pre;
+  margin-left:4em;
+  font-size:120%;
+}
+
+.biobutton {
+  margin-left:3em;
+}
+
+.infobutton {
+  margin-left:3em;
+}
+
+.bios {
+  font-size:90%;
+  margin-left:3em;
+}
+
+.talklink {
+  color: #000000;
+}
+
+.talklink:hover {
+  text-decoration: underline;
+}
+
+.talkroom {
+  text-transform: capitalize;
+}
+
+.grid {
+  width: 31%;
+  float: left;
+}
+
+.timegrid {
+  width: 7%;
+  float: left;
+  text-align: center;
+  font-weight: bold;
+}
+
+.gridheader {
+  font-weight: bold;
+  text-align: center;
+}
+
+.timetitle {
+  height: 100px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+}
+
+.fritimetitle {
+  height: 101px;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+}
+
+.talktitle {
+  font-size: 70%;
+  height: 100px;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+  overflow: hidden;
+}
+
+.talktitle1 {
+  font-size: 70%;
+  height: 100px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  overflow: hidden;
+}
+
+.talktitle2 {
+  font-size: 70%;
+  height: 201px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  overflow: hidden;
+}
+
+.talktitle3 {
+  font-size: 70%;
+  height: 302px;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  text-align: center;
+  overflow: hidden;
+}
+
+.music {
+  text-align: center;
+}
+
+.holder {width:210px; margin:5px; padding:1em; border:1px solid #ddd; float:left;}
+.holder h2 {text-align:left;}
+a.hid {color:#000; text-decoration:none; outline-style:none;padding: 1px 24px 8px 38px;}
+a.hid em {display:none;text-decoration: none;}
+a.hid:hover {text-decoration:none;}
+a.hid:active, a.hid:focus {background:#ccc; text-decoration: none;}
+a.hid:active span, a.hid:focus span {display:none;}
+a.hid:active em, a.hid:focus em {display:block; color:#555; width:100%; font-style:normal; cursor:default;}
+
+.submenu {
+  text-align: center;
+}
+
+.footnote {
+  font-size: 70%;
+  vertical-align: super;
+}
+
+td {
+    padding: 10px;
+}
+
+img[src*="#thumbnail"] {
+  width: 50%;
+  height: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -10,12 +10,10 @@
             {{ request.event.featured_sessions_text|rich_text }}
         {% else %}
             {% if talks %}
-                <b>{% translate "Welcome to our list of featured sessions!" %}</b><br><br>
-                {% blocktranslate trimmed %}
-                    We prepared a list of exciting sessions, so you can get a feel for our
-                    conference. Please keep in mind that this is not our full schedule.
-                    We will follow up with the full schedule in time, stay tuned!
-                {% endblocktranslate %}
+            {% comment %} {% blocktranslate trimmed %}
+            <b>Confirmed Talks</b><br><br>
+                    
+                {% endblocktranslate %} {% endcomment %}
             {% else %}
                 {% blocktranslate trimmed %}
                     In the near future you will see a curated list of sessions we'd like

@@ -148,17 +148,17 @@ CSP_IMG_SRC = merge_csp("'self'", "data:", config=config.get("site", "csp_img"))
 CSP_BASE_URI = ("'none'",)
 CSP_FORM_ACTION = merge_csp("'self'", config=config.get("site", "csp_form"))
 
-# CSRF_COOKIE_NAME = "pretalx_csrftoken"
-# CSRF_TRUSTED_ORIGINS = [urlparse(SITE_URL).hostname]
-# SESSION_COOKIE_NAME = "pretalx_session"
-# SESSION_COOKIE_HTTPONLY = True
-# if config.get("site", "cookie_domain"):
-    # SESSION_COOKIE_DOMAIN = CSRF_COOKIE_DOMAIN = config.get("site", "cookie_domain")
+CSRF_COOKIE_NAME = "pretalx_csrftoken"
+CSRF_TRUSTED_ORIGINS = [urlparse(SITE_URL).hostname]
+SESSION_COOKIE_NAME = "pretalx_session"
+SESSION_COOKIE_HTTPONLY = True
+if config.get("site", "cookie_domain"):
+     SESSION_COOKIE_DOMAIN = CSRF_COOKIE_DOMAIN = config.get("site", "cookie_domain")
 
 
-# SESSION_COOKIE_SECURE = config.getboolean(
-    # "site", "https", fallback=SITE_URL.startswith("https:")
-# )
+SESSION_COOKIE_SECURE = config.getboolean(
+     "site", "https", fallback=SITE_URL.startswith("https:")
+ )
 
 if config.has_option("site", "secret"):
     SECRET_KEY = config.get("site", "secret")

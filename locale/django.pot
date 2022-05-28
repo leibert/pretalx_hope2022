@@ -102,14 +102,12 @@ msgid "We have moved a session around: "
 msgstr ""
 
 #: pretalx/agenda/templates/agenda/featured.html:13
-msgid "Welcome to our list of featured sessions!"
+msgid "Confirmed Talks"
 msgstr ""
 
 #: pretalx/agenda/templates/agenda/featured.html:14
 msgid ""
-"We prepared a list of exciting sessions, so you can get a feel for our "
-"conference. Please keep in mind that this is not our full schedule. We will "
-"follow up with the full schedule in time, stay tuned!"
+""
 msgstr ""
 
 #: pretalx/agenda/templates/agenda/featured.html:20
