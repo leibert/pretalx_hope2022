@@ -22,6 +22,7 @@ from pretalx.submission.models import QuestionTarget
 
 
 @method_decorator(csp_update(IMG_SRC="https://www.gravatar.com"), name="dispatch")
+
 class SpeakerList(EventPermissionRequired, Filterable, ListView):
     context_object_name = "speakers"
     template_name = "agenda/speakers.html"
@@ -31,7 +32,7 @@ class SpeakerList(EventPermissionRequired, Filterable, ListView):
     def get_queryset(self):
         qs = (
             SpeakerProfile.objects.filter(
-                user__in=self.request.event.speakers, event=self.request.event
+                user__in=self.request.event.speakers
             )
             .select_related("user", "event")
             .order_by("user__name")
@@ -43,6 +44,95 @@ class SpeakerList(EventPermissionRequired, Filterable, ListView):
                 talk for talk in all_talks if profile.user in talk.speakers.all()
             ]
         return qs
+
+class WorkshopList_hope(EventPermissionRequired, Filterable, ListView):
+    context_object_name = "talks"
+    template_name = "agenda/talks_hope.html"
+    permission_required = "agenda.view_schedule"
+    default_filters = ("user__name__icontains",)
+
+    def get_queryset(self):
+        # return (
+        #     self.filter_queryset(self.request.event.submissions)
+        #     .select_related("event")
+        #     .prefetch_related("speakers")
+        #     .order_by("title")
+        #     .distinct()
+        # )
+
+        qs=self.filter_queryset(self.request.event.submissions).filter(submission_type_id=28).select_related("event").prefetch_related("speakers").distinct()
+        qs=list(qs)
+        qs.sort(key=lambda x: x.sort_title)
+        return qs
+        
+
+    @context
+    def search(self):
+        return self.request.GET.get("q")
+
+
+class TalkList_hope(EventPermissionRequired, Filterable, ListView):
+    context_object_name = "talks"
+    template_name = "agenda/talks_hope.html"
+    permission_required = "agenda.view_schedule"
+    default_filters = ("user__name__icontains",)
+
+    def get_queryset(self):
+        # return (
+        #     self.filter_queryset(self.request.event.submissions)
+        #     .select_related("event")
+        #     .prefetch_related("speakers")
+        #     .order_by("title")
+        #     .distinct()
+        # )
+
+        qs=self.filter_queryset(self.request.event.submissions).filter(submission_type_id=26).select_related("event").prefetch_related("speakers").distinct()
+        qs=list(qs)
+        qs.sort(key=lambda x: x.sort_title)
+        return qs
+        
+
+    @context
+    def search(self):
+        return self.request.GET.get("q")
+
+class SpeakerList_HOPE(EventPermissionRequired, Filterable, ListView):
+    context_object_name = "speakers"
+    template_name = "agenda/speakers_hope.html"
+    permission_required = "agenda.view_schedule"
+    default_filters = ("user__name__icontains",)
+
+    # def get_queryset(self):
+        # qs = (
+        #     SpeakerProfile.objects.filter(event=self.request.event
+        #     )
+        #     .select_related("user", "event")
+        #     .order_by("user__name")
+        # )
+
+            
+    def get_queryset(self):
+        qs = (
+            SpeakerProfile.objects.filter(
+                event=self.request.event
+            )
+            .select_related("user", "event")
+            # .order_by("lastname")
+        )
+        qs = self.filter_queryset(qs)
+        all_submissions = list(self.request.event.submissions.all().prefetch_related("speakers"))
+        qs=list(qs)
+        qs.sort(key=lambda x: x.last_name)
+        for profile in qs:
+            profile.talks = [
+                submission for submission in all_submissions if profile.user in submission.speakers.all()
+            ]
+        return qs
+
+    @context
+    def search(self):
+        return self.request.GET.get("q")
+
 
 
 @method_decorator(csp_update(IMG_SRC="https://www.gravatar.com"), name="dispatch")

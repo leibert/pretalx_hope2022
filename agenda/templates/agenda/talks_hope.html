@@ -1,0 +1,25 @@
+{% extends "agenda/base.html" %}
+{% load compress %}
+{% load i18n %}
+{% load rich_text %}
+
+{% load static %}
+
+{% block agenda_content %}
+    <article>
+        <section style="--track-color: {{ request.event.primary_color|default:'#3aa57c' }}" class="pretalx-list-day">
+          {% for talk in talks %}
+            <h3 id="{{ talk.code }}"><strong>{{ talk.title | rich_text}}</strong></h3>
+          <p>  
+          {% for speaker in talk.speakers.all %}
+            <strong>{{speaker.name}}&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+          {%endfor%}
+          </p>
+          
+            <p>{{ talk.abstract|rich_text}}</p>
+      
+       {% endfor %}
+        </section>
+    </article>
+{% endblock %}
+

@@ -222,7 +222,7 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            {% comment %}
+                            
 
                             <div class="nav-fold">
                                 <span class="has-children">
@@ -257,7 +257,7 @@
                                     </a>
                                 </div>
                             </div>
-                            {%endcomment%}
+                            
                         {% endif %}
                     {% endif %}
                     {% if can_see_orga_area %}
@@ -298,12 +298,12 @@
                                 </a>
                             </div>
                         </div>
-                        {%comment%}
+                        
                         <a class="nav-link {% if "reviews." in url_name %}active{% endif %}" href="{% url "orga:reviews.dashboard" event=request.event.slug %}">
                             <i class="fa fa-eye"></i>
                             <span class="sidebar-text">{% translate "Review" %}</span>
                         </a>
-                        {%endcomment%}
+                        
 
                         {% if can_view_speakers %}
                             <div class="nav-fold">

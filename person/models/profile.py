@@ -97,3 +97,7 @@ class SpeakerProfile(LogMixin, models.Model):
     @property
     def reviewer_answers(self):
         return self.answers.filter(question__is_visible_to_reviewers=True)
+
+    @property
+    def last_name(self):
+        return self.user.name.split(' ')[-1]

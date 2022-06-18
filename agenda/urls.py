@@ -72,6 +72,16 @@ urlpatterns = [
                     speaker.SpeakerRedirect.as_view(),
                     name="speaker.redirect",
                 ),
+                path(
+                    "workshops",
+                    speaker.WorkshopList_hope.as_view(),
+                    name="workshops_hope",
+                ),
+                path(
+                    "talks",
+                    speaker.TalkList_hope.as_view(),
+                    name="talks_hope",
+                ),
                 path("talk/", schedule.ScheduleView.as_view(), name="talks"),
                 path("talk/<slug>/", talk.TalkView.as_view(), name="talk"),
                 path(
@@ -98,6 +108,11 @@ urlpatterns = [
                     "speaker/<code>/talks.ics",
                     speaker.SpeakerTalksIcalView.as_view(),
                     name="speaker.talks.ical",
+                ),
+                path(
+                    "speakers",
+                    speaker.SpeakerList_HOPE.as_view(),
+                    name="speakers_hope",
                 ),
             ]
         ),

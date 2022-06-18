@@ -1,0 +1,108 @@
+{% load compress %}
+{% load i18n %}
+{% load rich_text %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src *.hope.net 'unsafe-inline' 'unsafe-eval'">
+    <meta http-equiv="Content-Security-Policy" content="style-src-elem *.hope.net 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="img-src *.hope.net">
+    <meta name="msapplication-TileImage" content="/img/hopexii_logo_144x144.png">
+    <meta name="msapplication-TileColor" content="#181919">
+    <link rel="icon" sizes="192x192" href="/img/hopexii_logo_192x192.png">
+    <link rel="icon" sizes="128x128" href="/img/hopexii_logo_128x128.png">
+    <link rel="icon" sizes="32x32" href="/img/hopexii_logo_32x32.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/hopexii_logo_152x152.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/hopexii_logo_76x76.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/hopexii_logo_60x60.png">
+    <title>[HOPE 2020] Speakers
+    </title>
+    <script src="/js/jquery.js"></script>
+    <script>
+      $(document).ready( function() {
+        $(".sitemenu li").on( "click", function () {
+          document.location = $(this).find('a').attr('href');
+        });
+        console.log("Is this thing on?");
+      });
+      
+    </script>
+    <script src="/js/spoonfeed.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/site.css">
+  </head>
+  <body>
+    <div id="topbar"><a name="top" href="index.html"><img src="https://www.hope.net/img/website_banner_white_on_transparent.png"></a></div>
+    <div id="menutop">
+      <nav>
+        <ul class="sitemenu">
+          <li><a href="https://hope.net/index.html">Home</a></li>
+          <li><a href="https://hope.net/about.html">About</a></li>
+          <li><a href="https://hope.net/news.html">News</a></li>
+          <li><a href="https://hope.net/faq.html">FAQ</a></li>
+          <li><a href="https://hope.net/keynotes.html">Keynotes</a></li>
+          <li><a href="https://hope.net/lodging.html">Lodging</a></li>
+          <li><a href="https://hope.net/travel.html">Travel</a></li>
+          <li><a href="https://hope.net/schedule.html">Schedule</a></li>
+          <li><a href="https://hope.net/speakers.html">Speakers</a></li>
+          <li><a href="https://hope.net/workshops.html">Workshops</a></li>
+          <li><a href="https://hope.net/sponsor.html">Sponsor</a></li>
+          <li><a href="https://hope.net/volunteer.html">Volunteer</a></li>
+          <li><a href="https://hope.net/graphics.html">Graphics</a></li>
+          <li><a href="https://hope.net/codeofconduct.html">Code of Conduct</a></li>
+          <li><a href="https://wiki.hope.net">Wiki</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div id="pagehead">
+      <header>
+        <h1 class="headline">[HOPE 2020] Speakers
+        </h1>
+      </header>
+    </div>
+    <div id="pagecontent">
+      <article><h2 id="the-hope-presenters">The HOPE Presenters</h2>
+        <p>This is our initial list of presenters for the <a href="https://hope.net/schedule.html">schedule</a> so far. Many more are coming soon!</p>
+
+
+
+            {% for speaker in speakers %}
+              <p><a name="{{speaker.user.email}}"></a>
+                {{ speaker.biography|rich_text }}
+              </p>
+            {% endfor %}
+
+
+
+      </article>
+    </div>
+    <div id="menubottom">
+      <nav>
+        <ul class="sitemenu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="keynotes.html">Keynotes</a></li>
+          <li><a href="lodging.html">Lodging</a></li>
+          <li><a href="travel.html">Travel</a></li>
+          <li><a href="schedule.html">Schedule</a></li>
+          <li><a href="speakers.html">Speakers</a></li>
+          <li><a href="workshops.html">Workshops</a></li>
+          <li><a href="sponsor.html">Sponsor</a></li>
+          <li><a href="volunteer.html">Volunteer</a></li>
+          <li><a href="graphics.html">Graphics</a></li>
+          <li><a href="codeofconduct.html">Code of Conduct</a></li>
+          <li><a href="https://wiki.hope.net">Wiki</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div id="pagefoot">
+      <div class="floatright"><a href="https://twitter.com/hopeconf">@hopeconf</a></div>
+      <div class="floatleft"><a href="https://www.hope.net/">hope.net</a></div>
+    </div>
+  </body>
+</html>

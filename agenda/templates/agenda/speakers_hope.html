@@ -1,0 +1,22 @@
+{% extends "agenda/base.html" %}
+{% load compress %}
+{% load i18n %}
+{% load rich_text %}
+
+{% load static %}
+
+{% block agenda_content %}
+    <article>
+        <section style="--track-color: {{ request.event.primary_color|default:'#3aa57c' }}" class="pretalx-list-day">
+            {% for speaker in speakers %}
+              <p><a name="{{speaker.user.email}}"></a>
+                {% if speaker.biography %}
+                  {{ speaker.biography |rich_text  }}
+                {% else %}
+                  <b>{{speaker.user.name}}</b> Bio coming soon
+                {% endif %}
+              </p>
+            {% endfor %}
+        </section>
+    </article>
+{% endblock %}

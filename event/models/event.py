@@ -321,6 +321,7 @@ class Event(LogMixin, FileCleanupMixin, models.Model):
         schedule_nojs = "{schedule}nojs"
         featured = "{base}featured/"
         talks = "{base}talk/"
+        talks_hope = "{base}talks"
         speakers = "{base}speaker/"
         changelog = "{schedule}changelog/"
         feed = "{schedule}feed.xml"

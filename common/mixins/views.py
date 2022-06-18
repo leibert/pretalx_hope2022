@@ -226,7 +226,7 @@ class PermissionRequired(PermissionRequiredMixin):
 class EventPermissionRequired(PermissionRequired):
     def get_permission_object(self):
         return self.request.event
-
+        
 
 class SensibleBackWizardMixin:
     def post(self, *args, **kwargs):

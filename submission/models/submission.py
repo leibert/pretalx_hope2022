@@ -269,6 +269,13 @@ class Submission(LogMixin, GenerateCode, FileCleanupMixin, models.Model):
         return self.image.url if self.image else ""
 
     @property
+    def sort_title(self):
+        if self.title.startswith("The "):
+            return self.title[4:]
+        else:
+            return self.title
+
+    @property
     def editable(self):
         if self.state == SubmissionStates.SUBMITTED:
             return self.event.cfp.is_open or (
