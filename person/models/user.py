@@ -129,6 +129,10 @@ class User(PermissionsMixin, GenerateCode, FileCleanupMixin, AbstractBaseUser):
     )
     pw_reset_time = models.DateTimeField(null=True, verbose_name="Password reset time")
 
+    @cached_property
+    def last_name(self):
+        return self.name.split(' ')[-1]
+
     def __str__(self) -> str:
         """For public consumption as it is used for Select widgets, e.g. on the
         feedback form."""

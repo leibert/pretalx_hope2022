@@ -9,7 +9,7 @@
     <article>
         <section style="--track-color: {{ request.event.primary_color|default:'#3aa57c' }}" class="pretalx-list-day">
             {% for speaker in speakers %}
-              <p><a name="{{speaker.user.email}}"></a>
+              <p id="{{speaker.code}}"><a name="{{speaker.user.email}}"></a>
                 {% if speaker.biography %}
                   {{ speaker.biography |rich_text  }}
                 {% else %}

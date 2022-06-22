@@ -11,8 +11,9 @@
           {% for talk in talks %}
             <h3 id="{{ talk.code }}"><strong>{{ talk.title | rich_text}}</strong></h3>
           <p>  
-          {% for speaker in talk.speakers.all %}
-            <strong>{{speaker.name}}&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+          {% for speaker in talk.speakers.all|dictsort:"last_name"%}
+            <strong><a href="https://scheduler.hope.net/new-hope/speakers#{{speaker.code}}">{{speaker.name}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</strong>
+
           {%endfor%}
           </p>
           

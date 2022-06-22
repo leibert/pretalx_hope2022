@@ -89,6 +89,8 @@ class TalkList_hope(EventPermissionRequired, Filterable, ListView):
         qs=self.filter_queryset(self.request.event.submissions).filter(submission_type_id=26).select_related("event").prefetch_related("speakers").distinct()
         qs=list(qs)
         qs.sort(key=lambda x: x.sort_title)
+        # for talk in qs:
+            # talk.speakers=list(talk.speakers).sort(key=lambda x: x.last_name)
         return qs
         
 
@@ -122,7 +124,7 @@ class SpeakerList_HOPE(EventPermissionRequired, Filterable, ListView):
         qs = self.filter_queryset(qs)
         all_submissions = list(self.request.event.submissions.all().prefetch_related("speakers"))
         qs=list(qs)
-        qs.sort(key=lambda x: x.last_name)
+        qs.sort(key=lambda x: x.user.last_name)
         for profile in qs:
             profile.talks = [
                 submission for submission in all_submissions if profile.user in submission.speakers.all()
