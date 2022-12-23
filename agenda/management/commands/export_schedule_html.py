@@ -91,10 +91,10 @@ def event_urls(event):
     yield event.urls.featured
     yield event.urls.talks
     yield event.urls.talks_hope
-    yield event.urls.workshops_hope
+    # yield event.urls.workshops_hope
     yield from event_talk_urls(event)
     yield event.urls.speakers
-    yield event.urls.speakers_hope
+    # yield event.urls.speakers_hope
     yield from event_speaker_urls(event)
     yield from event_exporter_urls(event)
     yield event.urls.changelog
