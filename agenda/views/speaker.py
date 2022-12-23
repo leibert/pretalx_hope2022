@@ -123,9 +123,14 @@ class SpeakerList_HOPE(EventPermissionRequired, Filterable, ListView):
         )
         qs = self.filter_queryset(qs)
         all_submissions = list(self.request.event.submissions.all().prefetch_related("speakers"))
+        
         qs=list(qs)
         qs.sort(key=lambda x: x.user.last_name)
         for profile in qs:
+            if profile.submissions.count() == 0:
+                qs.remove(profile)
+                continue
+            
             profile.talks = [
                 submission for submission in all_submissions if profile.user in submission.speakers.all()
             ]
@@ -138,9 +143,9 @@ class SpeakerList_HOPE(EventPermissionRequired, Filterable, ListView):
 
 
 @method_decorator(csp_update(IMG_SRC="https://www.gravatar.com"), name="dispatch")
-class SpeakerView(PermissionRequired, TemplateView):
+class SpeakerView(TemplateView):
     template_name = "agenda/speaker.html"
-    permission_required = "agenda.view_speaker"
+    # permission_required = "agenda.view_speaker"
     slug_field = "code"
 
     @context

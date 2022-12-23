@@ -89,6 +89,13 @@
                 <section class="description">
                     {{ submission.description|rich_text }}
                 </section>
+                <section>
+                    <br>
+                        Join the discussion in <a href="https://matrix.to/#/#{{submission.code}}:hope.net?via=hope.net&via=matrix.org&via=fairydust.space" target="_blank"> Matrix (#{{submission.code}}:hope.net) </a>
+                        <br><a href="https://wiki.hope.net/index.php?title=Matrix_How-To" target="_blank"><i>Instructions to set up Matrix</i></a>
+                    <br><br>        
+                </section>
+                
                 {% if answers %}
                     <hr />
                     <section class="answers">
